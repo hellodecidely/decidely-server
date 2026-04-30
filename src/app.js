@@ -85,7 +85,9 @@ app.use((req, res) => {
 // Initialize the plan expiration cron job
 initPlanExpirationCron();
 
+
 // Error handler (must be last)
 app.use(errorHandler);
+
 
 export default app;
