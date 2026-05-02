@@ -31,7 +31,7 @@ app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
 // Enable CORS
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'https://decidely-client.vercel.app/',
+  origin: process.env.CLIENT_URL || 'https://decidely-client.vercel.app',
   credentials: true,
 }));
 
