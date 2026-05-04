@@ -1,27 +1,26 @@
-// vercel-entry.js - ONLY for Vercel deployment
+// vercel-entry.js
 import app from './app.js';
-import mongoose from 'mongoose';
+import connectDB from './src/config/database.js';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
 let isConnected = false;
 
-const connectDB = async () => {
-  if (isConnected) return;
-  try {
-    await mongoose.connect(process.env.MONGODB_URI, {
-      serverSelectionTimeoutMS: 5000,
-      socketTimeoutMS: 45000,
-    });
-    isConnected = true;
-    console.log('✅ MongoDB Connected (Vercel)');
-  } catch (error) {
-    console.error('❌ MongoDB Error:', error.message);
-  }
-};
-
 export default async function handler(req, res) {
-  await connectDB();
+  // Connect only once
+  if (!isConnected) {
+    try {
+      await connectDB();
+      isConnected = true;
+    } catch (error) {
+      console.error('Database connection failed:', error.message);
+      return res.status(500).json({
+        success: false,
+        error: 'Database connection failed'
+      });
+    }
+  }
+  
   return app(req, res);
 }
