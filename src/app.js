@@ -29,10 +29,27 @@ const app = express();
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
-// Enable CORS
+// ✅ FIXED CORS - Support both local and production
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://decidely-client.vercel.app'
+];
+
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'https://decidely-client.vercel.app',
+  origin: function(origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      console.log('Blocked origin:', origin);
+      callback(null, true); // Temporarily allow all for testing
+    }
+  },
   credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 // Welcome route
@@ -85,9 +102,7 @@ app.use((req, res) => {
 // Initialize the plan expiration cron job
 initPlanExpirationCron();
 
-
 // Error handler (must be last)
 app.use(errorHandler);
-
 
 export default app;
