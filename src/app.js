@@ -79,14 +79,16 @@ app.get('/health', (req, res) => {
   });
 });
 
+// ✅ PUBLIC ROUTES (No auth required)
+app.use('/api/auth', authRoutes); // login, register, forgot-password are public
+app.use('/api/magic', magicRoutes); // ✅ Magic link validation is public
+
 app.use('/api', protect);
 
 // API Routes
-app.use('/api/auth', authRoutes);
 app.use('/api/workspaces', workspaceRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/approvals', approvalRoutes);
-app.use('/api/magic', magicRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 app.use('/api', clientRoutes); 
 app.use('/api/uploads', uploadRoutes); 

@@ -1,3 +1,4 @@
+// server/src/routes/client.js
 import express from 'express';
 import {
   addClientToProject,
@@ -10,7 +11,12 @@ import { protect } from '../middleware/auth.js';
 
 const router = express.Router();
 
-// All routes are protected
+// ✅ PUBLIC ROUTES - No authentication required (for magic links)
+// These should be placed BEFORE router.use(protect)
+// Add this if you have a public endpoint for validating magic links
+// router.get('/magic/validate/:token', validateMagicLink);
+
+// 🔒 PROTECTED ROUTES - Require authentication
 router.use(protect);
 
 // Project-specific client routes
