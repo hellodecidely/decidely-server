@@ -229,7 +229,7 @@ export const getCurrentPlan = async (req, res) => {
     
     let limits = {
       workspaces: 2,
-      projects: 2,
+      projects: 4,
       approvals: 20,
       imageDocSize: 10,   // Images & Documents limit in MB
       videoSize: 20       // Videos limit in MB
@@ -238,7 +238,7 @@ export const getCurrentPlan = async (req, res) => {
     if (user.plan === 'pro') {
       limits = {
         workspaces: 20,
-        projects: 20,
+        projects: 40,
         approvals: 200,
         imageDocSize: 20,  // 20MB for images/documents
         videoSize: 40      // 40MB for videos

@@ -268,9 +268,9 @@ UserSchema.methods.getUsageStats = function() {
     },
     projects: {
       used: this.projectsCount,
-      limit: this.plan === 'agency' ? 'Unlimited' : this.plan === 'pro' ? 20 : 2,
+      limit: this.plan === 'agency' ? 'Unlimited' : this.plan === 'pro' ? 40 : 4,
       remaining: this.plan === 'agency' ? 'Unlimited' : 
-                 (this.plan === 'pro' ? 20 - this.projectsCount : 2 - this.projectsCount)
+                 (this.plan === 'pro' ? 40 - this.projectsCount : 4 - this.projectsCount)
     },
     approvals: {
       used: this.approvalsCount,
