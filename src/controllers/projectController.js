@@ -22,7 +22,7 @@ export const createProject = async (req, res, next) => {
     
     // Check project limit
     if (!user.canCreateProject()) {
-      const limit = user.plan === 'pro' ? 20 : 2;
+      const limit = user.plan === 'pro' ? 40 : 4;
       return res.status(403).json({
         success: false,
         error: user.plan === 'free' 

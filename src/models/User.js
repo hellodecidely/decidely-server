@@ -187,8 +187,8 @@ UserSchema.methods.canCreateWorkspace = function() {
 // Method to check if user can create more projects
 UserSchema.methods.canCreateProject = function() {
   if (this.plan === 'agency') return true;
-  if (this.plan === 'pro') return this.projectsCount < 20;
-  return this.projectsCount < 2; // free plan
+  if (this.plan === 'pro') return this.projectsCount < 40;
+  return this.projectsCount < 4; // free plan
 };
 
 // Method to check if user can create more approvals (monthly reset)
