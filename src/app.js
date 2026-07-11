@@ -31,7 +31,7 @@ app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
 // ✅ FIXED CORS - Support both local and production
 const allowedOrigins = [
-  "https://www.decidely.online/",
+  "https://www.decidely.online",
   'http://localhost:5173',
   'https://decidely-client.vercel.app',
 ];
